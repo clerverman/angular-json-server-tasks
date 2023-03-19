@@ -1,0 +1,75 @@
+<div class="task-containers">
+  <div class="task-header">
+    <span>List of Tasks</span>
+    <button class="task-btn" (click)="showForm()">+ New Task</button>
+  </div>
+  <div class="task-container">
+    <div class="task-form" *ngIf="showFormDiv">
+      <label for="label">Label</label>
+      <input [(ngModel)]="myTask.label" type="text" class="task-input" />
+      <div>
+        <input [(ngModel)]="myTask.completed" type="checkbox" name="" id="" />
+        Completed
+      </div>
+      <div class="task-form-btn" *ngIf="!editTaskBtn">
+        <button (click)="addTask()" class="add">New Task</button>
+      </div>
+      <div class="task-form-btn">
+        <button class="update" *ngIf="editTaskBtn" (click)="updateTask()">
+          Update Task
+        </button>
+      </div>
+    </div>
+    <div class="task-form" *ngIf="!showFormDiv">
+      <input
+        [(ngModel)]="searchText"
+        type="text"
+        class="task-input"
+        placeholder="Search ..."
+        (keyup)="searchTask()"
+        autocomplete="off"
+      />
+    </div>
+    <div class="task-list" *ngIf="resultTasks!.length > 0">
+      <div class="task-item" *ngFor="let task of resultTasks">
+        <button class="task-item-edit" (click)="editTask(task)">Edit</button>
+        <span class="task-label">{{ task.label }}</span>
+        <div [ngSwitch]="task.completed">
+          <span
+            (click)="toggleCompleted(task)"
+            *ngSwitchCase="true"
+            class="task-completed"
+            [ngClass]="{
+              'bg-green': task.completed
+            }"
+            >Oui</span
+          >
+          <span
+            (click)="toggleCompleted(task)"
+            *ngSwitchDefault
+            class="task-completed"
+            [ngClass]="{
+              'bg-red': !task.completed
+            }"
+            >Non</span
+          >
+        </div>
+        <button class="task-item-delete" (click)="deleteTask(task.id!)">
+          Delete
+        </button>
+      </div>
+    </div>
+    <div
+      class="task-list"
+      *ngIf="searchText.length != 0 && resultTasks!.length == 0"
+    >
+      <div class="task-item">The task searched doesnt exist...</div>
+    </div>
+    <div
+      class="task-list"
+      *ngIf="searchText.length == 0 && resultTasks!.length == 0"
+    >
+      <div class="task-item">There is no task...</div>
+    </div>
+  </div>
+</div>

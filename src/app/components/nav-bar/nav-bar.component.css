@@ -1,0 +1,31 @@
+
+.nav-bar {
+  width: 100%;
+  background-color: rgb(38, 120, 38);
+  color : white ;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 35px ;
+}
+
+.nav-bar > .title {
+  font-size: 20px ;
+  cursor: pointer;
+}
+
+.links {
+  display: flex;
+  justify-content: space-around;
+}
+
+.links > a {
+  text-decoration: none ;
+  color: white;
+  margin : 0px 5px ;
+}
+
+.links > a:hover {
+  color : black ;
+  text-decoration : underline;
+}
